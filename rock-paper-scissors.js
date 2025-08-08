@@ -31,3 +31,7 @@ function getHumanChoice() {
       return 'scissors';
   }
 }
+
+// keep track of score
+let humanScore = 0;
+let computerScore = 0;
