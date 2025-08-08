@@ -19,3 +19,15 @@ function getComputerChoice() {
       return 'scissors';
   }
 }
+
+function getHumanChoice() {
+  let input = parseInt(prompt('enter 1/2/3:'));
+  switch (input) {
+    case 1:
+      return 'rock';
+    case 2:
+      return 'paper';
+    case 3:
+      return 'scissors';
+  }
+}
