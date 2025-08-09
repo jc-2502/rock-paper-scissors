@@ -32,10 +32,6 @@ function getHumanChoice() {
   }
 }
 
-// keep track of score
-let humanScore = 0;
-let computerScore = 0;
-
 function playRound(humanChoice, computerChoice) {
   let winner;
   if (humanChoice === computerChoice) {
@@ -57,16 +53,45 @@ function playRound(humanChoice, computerChoice) {
   let message;
   if (winner === 'human') {
     message = 'you won - '+humanChoice+' beats '+computerChoice;
-    ++humanScore;
   } else if (winner === 'computer') {
     message = 'you lost - '+computerChoice+' beats '+humanChoice;
-    ++computerScore;
   } else {
     message = 'tie - '+humanChoice;
   }
   console.log(message);
+  return winner
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-playRound(humanSelection, computerSelection);
+function playGame() {
+  // keep track of score
+  let humanScore = 0;
+  let computerScore = 0;
+
+  const rounds = 5;
+  for (let round = 1; round <= rounds; round++) {
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+
+    roundWinner = playRound(humanSelection, computerSelection);
+
+    if (roundWinner === 'human') {
+      ++humanScore;
+    } else if (roundWinner === 'computer') {
+      ++computerScore;
+    }
+  }
+
+  let resultMessage;
+  if (humanScore > computerScore) {
+    resultMessage = 'you won - '+humanScore+'-'+computerScore;
+    ++humanScore;
+  } else if (computerScore > humanScore) {
+    resultMessage = 'you lost - '+humanScore+'-'+computerScore;
+    ++computerScore;
+  } else {
+    resultMessage = 'tie - '+humanScore+'-'+computerScore;
+  }
+  console.log(resultMessage);
+}
+
+playGame()
