@@ -1,14 +1,3 @@
-// function getComputerChoice() {
-//   let randomNumber = Math.floor(Math.random() * 3) + 1;
-//   if (randomNumber === 1) {
-//     return 'rock';
-//   } else if (randomNumber === 2) {
-//     return 'paper';
-//   } else {
-//     return 'scissors';
-//   }
-// }
-
 function getComputerChoice() {
   switch (Math.floor(Math.random() * 3) + 1) {
     case 1:
@@ -33,33 +22,24 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
-  let winner;
   if (humanChoice === computerChoice) {
-    winner = 'tie';
+    console.log('tie - '+humanChoice;)
+    return 'tie';
   } else if (
       (humanChoice === 'rock' && computerChoice === 'scissors') ||
       (humanChoice === 'paper' && computerChoice === 'rock') ||
       (humanChoice === 'scissors' && computerChoice === 'paper')
     ) {
-    winner = 'human';
+    console.log('you won - '+humanChoice+' beats '+computerChoice;)
+    return 'human';
   } else if (
       (humanChoice === 'rock' && computerChoice === 'paper') ||
       (humanChoice === 'paper' && computerChoice === 'scissors') ||
       (humanChoice === 'scissors' && computerChoice === 'rock')
     ) {
-    winner = 'computer';
+    console.log('you lost - '+humanChoice+' loses to '+computerChoice;)
+    return 'computer';
   }
-
-  let message;
-  if (winner === 'human') {
-    message = 'you won - '+humanChoice+' beats '+computerChoice;
-  } else if (winner === 'computer') {
-    message = 'you lost - '+computerChoice+' beats '+humanChoice;
-  } else {
-    message = 'tie - '+humanChoice;
-  }
-  console.log(message);
-  return winner
 }
 
 function playGame() {
