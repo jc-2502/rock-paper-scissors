@@ -10,7 +10,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  let input = parseInt(prompt('enter 1/2/3 for rock/paper/scisssors:'));
+  const input = parseInt(prompt('enter 1/2/3 for rock/paper/scisssors:'));
   switch (input) {
     case 1:
       return 'rock';
@@ -62,7 +62,7 @@ function playGame() {
     const humanSelection = getHumanChoice();
     const computerSelection = getComputerChoice();
 
-    roundWinner = playRound(humanSelection, computerSelection);
+    const roundWinner = playRound(humanSelection, computerSelection);
 
     if (roundWinner === 'human') {
       ++humanScore;
