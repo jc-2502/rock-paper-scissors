@@ -38,30 +38,20 @@ let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
   let winner;
-  if (humanChoice === 'rock') {
-    if (computerChoice === 'rock') {
-      winner = 'tie';
-    } else if (computerChoice === 'paper') {
-      winner = 'computer';
-    } else if (computerChoice === 'scissors') {
-      winner = 'human';
-    }
-  } else if (humanChoice === 'paper') {
-    if (computerChoice === 'rock') {
-      winner = 'human';
-    } else if (computerChoice === 'paper') {
-      winner = 'tie';
-    } else if (computerChoice === 'scissors') {
-      winner = 'computer';
-    }
-  } else if (humanChoice === 'scissors') {
-    if (computerChoice === 'rock') {
-      winner = 'computer';
-    } else if (computerChoice === 'paper') {
-      winner = 'human';
-    } else if (computerChoice === 'scissors') {
-      winner = 'tie';
-    }
+  if (humanChoice === computerChoice) {
+    winner = 'tie';
+  } else if (
+      (humanChoice === 'rock' && computerChoice === 'scissors') ||
+      (humanChoice === 'paper' && computerChoice === 'rock') ||
+      (humanChoice === 'scissors' && computerChoice === 'paper')
+    ) {
+    winner = 'human';
+  } else if (
+      (humanChoice === 'rock' && computerChoice === 'paper') ||
+      (humanChoice === 'paper' && computerChoice === 'scissors') ||
+      (humanChoice === 'scissors' && computerChoice === 'rock')
+    ) {
+    winner = 'computer';
   }
 
   let message;
