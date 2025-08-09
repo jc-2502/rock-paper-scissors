@@ -23,22 +23,32 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    console.log('tie - '+humanChoice;)
+    console.log('tie - '+humanChoice);
     return 'tie';
   } else if (
       (humanChoice === 'rock' && computerChoice === 'scissors') ||
       (humanChoice === 'paper' && computerChoice === 'rock') ||
       (humanChoice === 'scissors' && computerChoice === 'paper')
     ) {
-    console.log('you won - '+humanChoice+' beats '+computerChoice;)
+    console.log('you won - '+humanChoice+' beats '+computerChoice);
     return 'human';
   } else if (
       (humanChoice === 'rock' && computerChoice === 'paper') ||
       (humanChoice === 'paper' && computerChoice === 'scissors') ||
       (humanChoice === 'scissors' && computerChoice === 'rock')
     ) {
-    console.log('you lost - '+humanChoice+' loses to '+computerChoice;)
+    console.log('you lost - '+humanChoice+' loses to '+computerChoice);
     return 'computer';
+  }
+}
+
+function printResultMessage(humanScore, computerScore) {
+  if (humanScore > computerScore) {
+    console.log('you won - '+humanScore+'-'+computerScore);
+  } else if (computerScore > humanScore) {
+    console.log('you lost - '+humanScore+'-'+computerScore);
+  } else {
+    console.log('tie - '+humanScore+'-'+computerScore);
   }
 }
 
@@ -61,17 +71,7 @@ function playGame() {
     }
   }
 
-  let resultMessage;
-  if (humanScore > computerScore) {
-    resultMessage = 'you won - '+humanScore+'-'+computerScore;
-    ++humanScore;
-  } else if (computerScore > humanScore) {
-    resultMessage = 'you lost - '+humanScore+'-'+computerScore;
-    ++computerScore;
-  } else {
-    resultMessage = 'tie - '+humanScore+'-'+computerScore;
-  }
-  console.log(resultMessage);
+  printResultMessage(humanScore, computerScore)
 }
 
 playGame()
