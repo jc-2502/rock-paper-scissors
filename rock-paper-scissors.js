@@ -67,15 +67,14 @@ function playRound(humanChoice, computerChoice) {
   let message;
   if (winner === 'human') {
     message = 'you won - '+humanChoice+' beats '+computerChoice;
+    ++humanScore;
   } else if (winner === 'computer') {
     message = 'you lost - '+computerChoice+' beats '+humanChoice;
+    ++computerScore;
   } else {
     message = 'tie - '+humanChoice;
   }
   console.log(message);
-
-  ++humanScore;
-  ++computerScore;
 }
 
 const humanSelection = getHumanChoice();
