@@ -15,6 +15,14 @@ function getComputerChoice() {
   }
 }
 
+function updateScore(result) {
+  if (result === 'human') {
+    ++humanScore;
+  } else if (result === 'computer') {
+    ++computerScore;
+  }
+}
+
 function printResultMessage(humanScore, computerScore) {
   if (humanScore > computerScore) {
     console.log('you won - '+humanScore+'-'+computerScore);
@@ -25,14 +33,14 @@ function printResultMessage(humanScore, computerScore) {
   }
 }
 
-function checkIfGameOver () {
+function checkIfGameOver() {
   if (!(humanScore < 5 && computerScore < 5)) {
     printResultMessage(humanScore, computerScore);
     stopGame();
   }
 }
 
-function stopGame () {
+function stopGame() {
   buttons.forEach((button) => button.removeEventListener("click", playRound));
 }
 
@@ -60,11 +68,7 @@ function playRound(event) {
     result = 'computer';
   }
 
-  if (result === 'human') {
-    ++humanScore;
-  } else if (result === 'computer') {
-    ++computerScore;
-  }
+  updateScore(result);
 
   checkIfGameOver();
 }
