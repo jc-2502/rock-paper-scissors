@@ -3,6 +3,7 @@ let humanScore = 0;
 let computerScore = 0;
 
 const buttons = document.querySelectorAll('button');
+const score = document.querySelector('#score');
 const scoreLog = document.querySelector('#score-log');
 
 function getComputerChoice() {
@@ -15,6 +16,10 @@ function getComputerChoice() {
       return 'scissors';
   }
 }
+
+function updateDisplayedScore() {
+  score.textContent = 'you '+humanScore+' - '+computerScore+' computer';
+};
 
 function displayFinalResultMessage(humanScore, computerScore) {
   result = document.createElement('p');
@@ -62,9 +67,13 @@ function playRound(event) {
     ++computerScore;
   }
 
+  updateDisplayedScore();
   scoreLog.appendChild(roundResult);
 
   checkIfGameOver();
 }
+
+// set starting score to 0 - 0
+updateDisplayedScore();
 
 buttons.forEach((button) => button.addEventListener("click", playRound));
