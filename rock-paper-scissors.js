@@ -3,6 +3,7 @@ let humanScore = 0;
 let computerScore = 0;
 
 const buttons = document.querySelectorAll('button');
+const scoreLog = document.querySelector('#score-log');
 
 function getComputerChoice() {
   switch (Math.floor(Math.random() * 3) + 1) {
@@ -15,27 +16,21 @@ function getComputerChoice() {
   }
 }
 
-function updateScore(result) {
-  if (result === 'human') {
-    ++humanScore;
-  } else if (result === 'computer') {
-    ++computerScore;
-  }
-}
+function displayFinalResultMessage(humanScore, computerScore) {
+  result = document.createElement('p');
 
-function printResultMessage(humanScore, computerScore) {
   if (humanScore > computerScore) {
-    console.log('you won - '+humanScore+'-'+computerScore);
+    result.textContent = 'you won - '+humanScore+'-'+computerScore;
   } else if (computerScore > humanScore) {
-    console.log('you lost - '+humanScore+'-'+computerScore);
-  } else {
-    console.log('tie - '+humanScore+'-'+computerScore);
+    result.textContent = 'you lost - '+humanScore+'-'+computerScore;
   }
+
+  scoreLog.appendChild(result);
 }
 
 function checkIfGameOver() {
   if (!(humanScore < 5 && computerScore < 5)) {
-    printResultMessage(humanScore, computerScore);
+    displayFinalResultMessage(humanScore, computerScore);
     stopGame();
   }
 }
@@ -47,28 +42,27 @@ function stopGame() {
 function playRound(event) {
   const humanChoice = event.target.textContent;
   const computerChoice = getComputerChoice();
-  let result;
+  const roundResult = document.createElement('p');
 
   if (humanChoice === computerChoice) {
-    console.log('tie - '+humanChoice);
-    result = 'tie';
+    roundResult.textContent = 'tie - '+humanChoice;
   } else if (
       (humanChoice === 'rock' && computerChoice === 'scissors') ||
       (humanChoice === 'paper' && computerChoice === 'rock') ||
       (humanChoice === 'scissors' && computerChoice === 'paper')
     ) {
-    console.log('you won - '+humanChoice+' beats '+computerChoice);
-    result = 'human';
+    roundResult.textContent = 'you won - '+humanChoice+' beats '+computerChoice;
+    ++humanScore;
   } else if (
       (humanChoice === 'rock' && computerChoice === 'paper') ||
       (humanChoice === 'paper' && computerChoice === 'scissors') ||
       (humanChoice === 'scissors' && computerChoice === 'rock')
     ) {
-    console.log('you lost - '+humanChoice+' loses to '+computerChoice);
-    result = 'computer';
+    roundResult.textContent = 'you lost - '+humanChoice+' loses to '+computerChoice;
+    ++computerScore;
   }
 
-  updateScore(result);
+  scoreLog.appendChild(roundResult);
 
   checkIfGameOver();
 }
