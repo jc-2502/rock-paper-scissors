@@ -34,6 +34,8 @@ function displayFinalResultMessage(humanScore, computerScore) {
     result.textContent = 'you lost - ' + getCurrentScore();
   }
 
+  result.id = 'final-result-msg';
+
   scoreLog.appendChild(result);
 }
 
@@ -72,6 +74,8 @@ function playRound(event) {
   }
 
   updateDisplayedScore();
+
+  roundResult.classList.add('round-result');
   scoreLog.appendChild(roundResult);
 
   checkIfGameOver();

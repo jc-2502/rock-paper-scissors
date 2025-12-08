@@ -1,0 +1,37 @@
+* {
+  font-family: "Liberation Sans", sans-serif;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+button {
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  font-size: 20px;
+}
+
+#score, #final-result-msg {
+  text-align: center;
+}
+
+#score {
+  font-size: 28px;
+}
+
+#score-log {
+  width: 300px;
+  margin: auto;
+}
+
+.round-result {
+  font-size: 16px;
+}
+
+#final-result-msg {
+  font-size: 24px;
+}
