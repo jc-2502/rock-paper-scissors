@@ -3,7 +3,7 @@ let humanScore = 0;
 let computerScore = 0;
 
 const buttons = document.querySelectorAll('button');
-const score = document.querySelector('#score');
+const displayedScore = document.querySelector('#score');
 const scoreLog = document.querySelector('#score-log');
 
 function getComputerChoice() {
@@ -17,17 +17,21 @@ function getComputerChoice() {
   }
 }
 
+function getCurrentScore() {
+  return humanScore + ' - ' + computerScore
+}
+
 function updateDisplayedScore() {
-  score.textContent = 'you '+humanScore+' - '+computerScore+' computer';
+  displayedScore.textContent = 'you ' + getCurrentScore() + ' computer';
 };
 
 function displayFinalResultMessage(humanScore, computerScore) {
   result = document.createElement('p');
 
   if (humanScore > computerScore) {
-    result.textContent = 'you won - '+humanScore+'-'+computerScore;
+    result.textContent = 'you won - ' + getCurrentScore();
   } else if (computerScore > humanScore) {
-    result.textContent = 'you lost - '+humanScore+'-'+computerScore;
+    result.textContent = 'you lost - ' + getCurrentScore();
   }
 
   scoreLog.appendChild(result);
@@ -50,21 +54,21 @@ function playRound(event) {
   const roundResult = document.createElement('p');
 
   if (humanChoice === computerChoice) {
-    roundResult.textContent = 'tie - '+humanChoice;
+    roundResult.textContent = 'tie - ' + humanChoice + ' - ' + getCurrentScore();
   } else if (
       (humanChoice === 'rock' && computerChoice === 'scissors') ||
       (humanChoice === 'paper' && computerChoice === 'rock') ||
       (humanChoice === 'scissors' && computerChoice === 'paper')
     ) {
-    roundResult.textContent = 'you won - '+humanChoice+' beats '+computerChoice;
     ++humanScore;
+    roundResult.textContent = 'you won - ' + humanChoice + ' beats ' + computerChoice + ' - ' + getCurrentScore();
   } else if (
       (humanChoice === 'rock' && computerChoice === 'paper') ||
       (humanChoice === 'paper' && computerChoice === 'scissors') ||
       (humanChoice === 'scissors' && computerChoice === 'rock')
     ) {
-    roundResult.textContent = 'you lost - '+humanChoice+' loses to '+computerChoice;
     ++computerScore;
+    roundResult.textContent = 'you lost - ' + humanChoice + ' loses to ' + computerChoice + ' - ' + getCurrentScore();
   }
 
   updateDisplayedScore();
