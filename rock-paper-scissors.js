@@ -1,6 +1,6 @@
 // keep track of score
-let humanScore = 0;
-let computerScore = 0;
+let humanScore;
+let computerScore;
 
 const buttons = document.querySelectorAll('button');
 const displayedScore = document.querySelector('#score');
@@ -51,10 +51,23 @@ function stopGame() {
   buttons.forEach((button) => button.removeEventListener("click", playRound));
 }
 
+function displayPlayAgainButton() {
+  const playAgainButton = document.createElement('button');
+  const body = document.querySelector('body');
+
+  playAgainButton.textContent = 'play again';
+  playAgainButton.id = 'play-again';
+
+  playAgainButton.addEventListener("click", startNewGame);
+
+  body.appendChild(playAgainButton);
+}
+
 function checkIfGameOver() {
   if (!(humanScore < 5 && computerScore < 5)) {
     displayFinalResultMessage(humanScore, computerScore);
     stopGame();
+    displayPlayAgainButton();
   }
 }
 
@@ -112,7 +125,22 @@ function playRound(event) {
   checkIfGameOver();
 }
 
-// set starting score to 0 - 0
-updateDisplayedScore();
+function startNewGame() {
+  // set starting score to 0 - 0
+  humanScore = 0;
+  computerScore = 0;
 
-buttons.forEach((button) => button.addEventListener("click", playRound));
+  updateDisplayedScore();
+
+  // clear score log
+  const scoreLogEntries = document.querySelectorAll('#score-log > *');
+  scoreLogEntries.forEach((entry) => entry.remove());
+
+  // remove play again button if on page (not first game)
+  const playAgainButton = document.querySelector('#play-again');
+  if (playAgainButton) playAgainButton.remove();
+
+  buttons.forEach((button) => button.addEventListener("click", playRound));
+}
+
+startNewGame();
