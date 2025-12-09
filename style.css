@@ -24,10 +24,14 @@ button, #score, .score-after-round, #final-result-msg {
   margin-bottom: 18px;
 }
 
-.round-result, .score-after-round {
+.round-num, .round-result, .score-after-round {
   font-size: 16px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.round-num {
+  width: 25px;
 }
 
 .round-result {

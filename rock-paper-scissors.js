@@ -1,4 +1,5 @@
 // keep track of score
+let rounds;
 let humanScore;
 let computerScore;
 
@@ -73,6 +74,7 @@ function checkIfGameOver() {
 
 function displayRoundResultLine(result, humanChoice, computerChoice) {
   const roundResultDiv = document.createElement('div');
+  const roundNum = document.createElement('p');
   const roundResult = document.createElement('p');
   const scoreAfterRound = document.createElement('p');
 
@@ -84,12 +86,15 @@ function displayRoundResultLine(result, humanChoice, computerChoice) {
     roundResult.textContent = 'you lost - ' + humanChoice + ' loses to ' + computerChoice;
   }
 
+  roundNum.textContent = rounds;
   scoreAfterRound.textContent = getCurrentScore();
 
   roundResultDiv.classList.add('round-result-row');
+  roundNum.classList.add('round-num');
   roundResult.classList.add('round-result');
   scoreAfterRound.classList.add('score-after-round');
 
+  roundResultDiv.appendChild(roundNum);
   roundResultDiv.appendChild(roundResult);
   roundResultDiv.appendChild(scoreAfterRound);
   scoreLog.appendChild(roundResultDiv);
@@ -116,6 +121,8 @@ function playRound(event) {
     result = 'computer';
   }
 
+  ++rounds;
+
   updateScore(result);
 
   displayRoundResultLine(result, humanChoice, computerChoice);
@@ -126,6 +133,7 @@ function playRound(event) {
 }
 
 function startNewGame() {
+  rounds = 0;
   // set starting score to 0 - 0
   humanScore = 0;
   computerScore = 0;
