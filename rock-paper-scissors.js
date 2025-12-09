@@ -34,17 +34,17 @@ function updateDisplayedScore() {
 };
 
 function displayFinalResultMessage(humanScore, computerScore) {
-  result = document.createElement('p');
+  const resultMsg = document.createElement('p');
 
   if (humanScore > computerScore) {
-    result.textContent = 'you won - ' + getCurrentScore();
+    resultMsg.textContent = 'you won - ' + getCurrentScore();
   } else if (computerScore > humanScore) {
-    result.textContent = 'you lost - ' + getCurrentScore();
+    resultMsg.textContent = 'you lost - ' + getCurrentScore();
   }
 
-  result.id = 'final-result-msg';
+  resultMsg.id = 'final-result-msg';
 
-  scoreLog.appendChild(result);
+  scoreLog.appendChild(resultMsg);
 }
 
 function stopGame() {
@@ -85,6 +85,7 @@ function displayRoundResultLine(result, humanChoice, computerChoice) {
 function playRound(event) {
   const humanChoice = event.target.textContent;
   const computerChoice = getComputerChoice();
+  let result;
 
   if (humanChoice === computerChoice) {
     result = 'tie';
