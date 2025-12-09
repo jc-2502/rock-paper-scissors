@@ -53,30 +53,40 @@ function stopGame() {
 function playRound(event) {
   const humanChoice = event.target.textContent;
   const computerChoice = getComputerChoice();
+
+  const roundResultDiv = document.createElement('div');
   const roundResult = document.createElement('p');
+  const scoreAfterRound = document.createElement('p');
 
   if (humanChoice === computerChoice) {
-    roundResult.textContent = 'tie - ' + humanChoice + ' - ' + getCurrentScore();
+    roundResult.textContent = 'tie - ' + humanChoice;
   } else if (
       (humanChoice === 'rock' && computerChoice === 'scissors') ||
       (humanChoice === 'paper' && computerChoice === 'rock') ||
       (humanChoice === 'scissors' && computerChoice === 'paper')
     ) {
     ++humanScore;
-    roundResult.textContent = 'you won - ' + humanChoice + ' beats ' + computerChoice + ' - ' + getCurrentScore();
+    roundResult.textContent = 'you won - ' + humanChoice + ' beats ' + computerChoice;
   } else if (
       (humanChoice === 'rock' && computerChoice === 'paper') ||
       (humanChoice === 'paper' && computerChoice === 'scissors') ||
       (humanChoice === 'scissors' && computerChoice === 'rock')
     ) {
     ++computerScore;
-    roundResult.textContent = 'you lost - ' + humanChoice + ' loses to ' + computerChoice + ' - ' + getCurrentScore();
+    roundResult.textContent = 'you lost - ' + humanChoice + ' loses to ' + computerChoice;
   }
 
   updateDisplayedScore();
 
+  scoreAfterRound.textContent = getCurrentScore();
+
+  roundResultDiv.classList.add('round-result-row');
   roundResult.classList.add('round-result');
-  scoreLog.appendChild(roundResult);
+  scoreAfterRound.classList.add('score-after-round');
+
+  roundResultDiv.appendChild(roundResult);
+  roundResultDiv.appendChild(scoreAfterRound);
+  scoreLog.appendChild(roundResultDiv);
 
   checkIfGameOver();
 }
