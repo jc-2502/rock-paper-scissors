@@ -17,6 +17,14 @@ function getComputerChoice() {
   }
 }
 
+function updateScore(result) {
+  if (result === 'human') {
+    ++humanScore;
+  } else if (result === 'computer') {
+    ++computerScore;
+  }
+}
+
 function getCurrentScore() {
   return humanScore + ' - ' + computerScore
 }
@@ -39,6 +47,10 @@ function displayFinalResultMessage(humanScore, computerScore) {
   scoreLog.appendChild(result);
 }
 
+function stopGame() {
+  buttons.forEach((button) => button.removeEventListener("click", playRound));
+}
+
 function checkIfGameOver() {
   if (!(humanScore < 5 && computerScore < 5)) {
     displayFinalResultMessage(humanScore, computerScore);
@@ -46,37 +58,18 @@ function checkIfGameOver() {
   }
 }
 
-function stopGame() {
-  buttons.forEach((button) => button.removeEventListener("click", playRound));
-}
-
-function playRound(event) {
-  const humanChoice = event.target.textContent;
-  const computerChoice = getComputerChoice();
-
+function displayRoundResultLine(result, humanChoice, computerChoice) {
   const roundResultDiv = document.createElement('div');
   const roundResult = document.createElement('p');
   const scoreAfterRound = document.createElement('p');
 
-  if (humanChoice === computerChoice) {
+  if (result === 'tie') {
     roundResult.textContent = 'tie - ' + humanChoice;
-  } else if (
-      (humanChoice === 'rock' && computerChoice === 'scissors') ||
-      (humanChoice === 'paper' && computerChoice === 'rock') ||
-      (humanChoice === 'scissors' && computerChoice === 'paper')
-    ) {
-    ++humanScore;
+  } else if (result === 'human') {
     roundResult.textContent = 'you won - ' + humanChoice + ' beats ' + computerChoice;
-  } else if (
-      (humanChoice === 'rock' && computerChoice === 'paper') ||
-      (humanChoice === 'paper' && computerChoice === 'scissors') ||
-      (humanChoice === 'scissors' && computerChoice === 'rock')
-    ) {
-    ++computerScore;
+  } else if (result === 'computer') {
     roundResult.textContent = 'you lost - ' + humanChoice + ' loses to ' + computerChoice;
   }
-
-  updateDisplayedScore();
 
   scoreAfterRound.textContent = getCurrentScore();
 
@@ -87,6 +80,33 @@ function playRound(event) {
   roundResultDiv.appendChild(roundResult);
   roundResultDiv.appendChild(scoreAfterRound);
   scoreLog.appendChild(roundResultDiv);
+}
+
+function playRound(event) {
+  const humanChoice = event.target.textContent;
+  const computerChoice = getComputerChoice();
+
+  if (humanChoice === computerChoice) {
+    result = 'tie';
+  } else if (
+      (humanChoice === 'rock' && computerChoice === 'scissors') ||
+      (humanChoice === 'paper' && computerChoice === 'rock') ||
+      (humanChoice === 'scissors' && computerChoice === 'paper')
+    ) {
+    result = 'human';
+  } else if (
+      (humanChoice === 'rock' && computerChoice === 'paper') ||
+      (humanChoice === 'paper' && computerChoice === 'scissors') ||
+      (humanChoice === 'scissors' && computerChoice === 'rock')
+    ) {
+    result = 'computer';
+  }
+
+  updateScore(result);
+
+  displayRoundResultLine(result, humanChoice, computerChoice);
+
+  updateDisplayedScore();
 
   checkIfGameOver();
 }
