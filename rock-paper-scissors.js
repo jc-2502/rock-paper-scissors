@@ -49,7 +49,7 @@ function displayFinalResultMessage(humanScore, computerScore) {
 }
 
 function stopGame() {
-  buttons.forEach((button) => button.removeEventListener("click", playRound));
+  buttons.forEach((button) => button.removeEventListener('click', playRound));
 }
 
 function displayPlayAgainButton() {
@@ -59,7 +59,7 @@ function displayPlayAgainButton() {
   playAgainButton.textContent = 'play again';
   playAgainButton.id = 'play-again';
 
-  playAgainButton.addEventListener("click", startNewGame);
+  playAgainButton.addEventListener('click', startNewGame);
 
   body.appendChild(playAgainButton);
 }
@@ -148,7 +148,7 @@ function startNewGame() {
   const playAgainButton = document.querySelector('#play-again');
   if (playAgainButton) playAgainButton.remove();
 
-  buttons.forEach((button) => button.addEventListener("click", playRound));
+  buttons.forEach((button) => button.addEventListener('click', playRound));
 }
 
 startNewGame();
