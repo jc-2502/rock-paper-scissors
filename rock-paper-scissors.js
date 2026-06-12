@@ -74,9 +74,9 @@ function checkIfGameOver() {
 
 function displayRoundResultLine(result, humanChoice, computerChoice) {
   const roundResultDiv = document.createElement('div');
-  const roundNum = document.createElement('p');
+  const roundNum = document.createElement('div');
   const roundResult = document.createElement('p');
-  const scoreAfterRound = document.createElement('p');
+  const scoreAfterRound = document.createElement('div');
 
   if (result === 'tie') {
     roundResult.textContent = 'tie - ' + humanChoice;
